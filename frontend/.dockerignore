@@ -1,0 +1,11 @@
+# Frontend .dockerignore
+node_modules/
+dist/
+coverage/
+.angular/
+.git
+.gitignore
+*.md
+Dockerfile
+.dockerignore
+*.spec.ts
