@@ -68,21 +68,21 @@ import { LoyaltyService } from '../../../services/loyalty.service';
       <div class="table-container">
         <table class="table">
           <thead>
-            <tr><th>Date</th><th>Type</th><th>Points</th><th>Description</th></tr>
+          <tr><th>Date</th><th>Type</th><th>Points</th><th>Description</th></tr>
           </thead>
           <tbody>
-            <tr *ngFor="let tx of transactions">
-              <td data-label="Date">{{ tx.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
-              <td data-label="Type">
-                <span class="badge" [ngClass]="getTypeBadgeClass(tx.transactionType)">{{ getTypeLabel(tx.transactionType) }}</span>
-              </td>
-              <td data-label="Points">
-                <strong [ngClass]="tx.points > 0 ? 'text-success' : 'text-danger'">
-                  {{ tx.points > 0 ? '+' : '' }}{{ tx.points }}
-                </strong>
-              </td>
-              <td data-label="Description">{{ tx.description }}</td>
-            </tr>
+          <tr *ngFor="let tx of transactions">
+            <td data-label="Date">{{ tx.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td data-label="Type">
+              <span class="badge" [ngClass]="getTypeBadgeClass(tx.transactionType)">{{ getTypeLabel(tx.transactionType) }}</span>
+            </td>
+            <td data-label="Points">
+              <strong [ngClass]="tx.points > 0 ? 'text-success' : 'text-danger'">
+                {{ tx.points > 0 ? '+' : '' }}{{ tx.points }}
+              </strong>
+            </td>
+            <td data-label="Description">{{ tx.description }}</td>
+          </tr>
           </tbody>
         </table>
         <div *ngIf="transactions.length === 0" class="empty-state">
@@ -145,7 +145,7 @@ import { LoyaltyService } from '../../../services/loyalty.service';
           <p>Solde actuel: <strong>{{ balance?.balance }} points</strong></p>
           <div class="form-group">
             <label class="form-label">Points à utiliser</label>
-            <input type="number" class="form-control" [(ngModel)]="redeemPoints" min="1" [max]="balance?.balance">
+            <input type="number" class="form-control" [(ngModel)]="redeemPoints" min="1" [max]="balance?.balance || 0">
           </div>
           <div class="form-group">
             <label class="form-label">Description</label>
@@ -244,7 +244,7 @@ export class LoyaltyDashboardComponent implements OnInit {
           this.adjustPoints = 0;
           this.adjustDescription = '';
         },
-        error: () => alert('Erreur')
+        error: () => alert('error')
       });
     }
   }
@@ -259,7 +259,7 @@ export class LoyaltyDashboardComponent implements OnInit {
           this.redeemPoints = 0;
           this.redeemDescription = '';
         },
-        error: () => alert('Erreur')
+        error: () => alert('error')
       });
     }
   }
